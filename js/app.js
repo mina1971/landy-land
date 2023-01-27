@@ -22,9 +22,8 @@
  * Define Global Variables
  *
  */
-const list = document.getElementById("navbar__list");
-const sections = document.querySelectorAll("section");
-
+let list = document.getElementById("navbar__list");
+let sections = document.querySelectorAll("section");
 
 /**
  * End Global Variables
@@ -40,54 +39,56 @@ const sections = document.querySelectorAll("section");
 
 // build the nav
 function myNewNavbar() {
- // loop over sections
-  for(sec of sections) {
+  // loop over sections
+  for (sec of sections) {
     // create list item and enchor tag
-      const listItem = document.createElement('li');
-       // attributes from section id 
-      listItem.innerHTML =`<li><a href="#${sec.id}"data-nav="${sec.id}"class="menu__link">
+    const listItem = document.createElement("li");
+    // attributes from section id
+    listItem.innerHTML = `<li><a href="#${sec.id}"data-nav="${sec.id}"class="menu__link">
       ${sec.dataset.nav}</a></li>`;
-     
-       list.appendChild(listItem);  
-   }
+
+    list.appendChild(listItem);
   }
-    //smooth scrolling ,title
-    //add section.dataset.nav , smooth scrolling ,title
-   list.addEventListener('click',(toSection)=>{
-    toSection.preventDefault();
-    if(toSection.target.dataset.nav){
-      document.getElementById(`${toSection.target.dataset.nav}`).scrollIntoView({behavior:"smooth"})
-    }
-   })
+}
+//smooth scrolling ,title
+//add section.dataset.nav , smooth scrolling ,title
+list.addEventListener("click", (toSection) => {
+  toSection.preventDefault();
+  if (toSection.target.dataset.nav) {
+    document
+      .getElementById(`${toSection.target.dataset.nav}`)
+      .scrollIntoView({ behavior: "smooth" });
+  }
+});
 myNewNavbar();
 
 // Build menu
 
-window.addEventListener("scroll", navLight);
 //scroll to section on link click
+window.addEventListener("scroll", addLight);
+
 const links = document.querySelectorAll("a.menu__link");
-function navLight() {
-  //loop over section
-  sections.forEach((section) => {
-    //using getBoundingClientRect Return the size of an element and its position relative to the viewport
-    const sectionTop = section.getBoundingClientRect().top;
-    //Selection of items by dataset
-    const sectionTitle = section.getAttribute("data-nav");
-    if (sectionTop > 0 && sectionTop < 250) {
-      // add active class link
-      section.classList.add("your-active-class");
-      //loop over links
-      links.forEach(link => {
-        if (link.textContent === sectionTitle) {
-          link.classList.add("active-class");
-        } else {
-          link.classList.remove("active-class");
-        }
-      })
-    }
-  })  
+
+// Loop through the links and add the active class to the current/clicked button
+function addLight() {
+  for (let i = 0; i < links.length; i++) {
+    links[i].addEventListener("click", function () {
+      const current = document.getElementsByClassName("active-class");
+
+      // If there's no active class
+      if (current.length > 0) {
+        current[0].className = current[0].className.replace(
+          " active-class",
+          ""
+        );
+      }
+
+      // Add the active class to the current/clicked button
+
+      this.className += " active-class";
+    });
+  }
 }
-navLight();
 // Scroll to anchor ID using scrollTO event
 
 /**
@@ -98,7 +99,7 @@ navLight();
 
 // Build  mini menu using  small list icon
 function miniNavBar() {
-  var nav = document.getElementById("navbar__list");
+  const nav = document.getElementById("navbar__list");
   if (nav.className === "nav-top") {
     nav.className += " show_list";
   } else {

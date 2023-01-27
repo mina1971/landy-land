@@ -89,6 +89,7 @@ section {
   color: #fff;
   transition: ease 0.3s all;
 }
+
 .navbar__menu .menu__link.active-class {
   background: #333;
   color: #fff;
@@ -231,7 +232,6 @@ section.your-active-class .landing__container::after {
 
 /* Section Active Styles Keyframe Animations */
 
-
 .nav-top {
   overflow: hidden;
   background-color: #333;
@@ -268,6 +268,48 @@ section.your-active-class .landing__container::after {
 we can use sass to make simple nest 
  */
 @media screen and (max-width: 502px) {
+  .navbar__menu ul {
+    padding-left: 0;
+    margin: 0;
+    text-align: left;
+    background-color: rgb(87, 91, 85);
+  }
+
+  .navbar__menu li {
+    display: block;
+    padding: 0px;
+  }
+  .navbar__menu .menu__link {
+    display: none;
+    padding: 1em;
+    font-weight: bold;
+    text-decoration: none;
+    color: rgb(215, 16, 16);
+  }
+
+  .nav-top a:not(:first-child) {
+    display: none;
+  }
+  .nav-top a.icon {
+    float: right;
+    display: block;
+  }
+  .nav-top.show_list {
+    position: relative;
+  }
+  .nav-top.show_list .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .nav-top.show_list a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 375px) {
   .navbar__menu ul {
     padding-left: 0;
     margin: 0;

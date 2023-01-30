@@ -65,32 +65,30 @@ myNewNavbar();
 // Build menu
 
 //scroll to section on link click
-window.addEventListener("scroll", navLight);
-//scroll to section on link click
+window.addEventListener("scroll", addLight);
+
 const links = document.querySelectorAll("a.menu__link");
-function navLight() {
-  //loop over section
-  sections.forEach(section => {
-    //using getBoundingClientRect Return the size of an element and its position relative to the viewport
-    const sectionTop = section.getBoundingClientRect().top;
-    //Selection of items by dataset
-    const sectionTitle = section.getAttribute("data-nav");
-    // if begin
-    if (sectionTop > 0 && sectionTop < 250) {
-      // add active class link
-      section.classList.add("your-active-class");
-      //loop over links
-      links.forEach(link => {
-        if (link.textContent === sectionTitle) {
-          link.classList.add("active-class");
-        } else {
-          link.classList.remove("active-class");
-        }
-      })
-    }//end if
-  })
+
+// Loop through the links and add the active class to the current/clicked button
+function addLight() {
+  for (let i = 0; i < links.length; i++) {
+    links[i].addEventListener("click", function () {
+      const current = document.getElementsByClassName("active-class");
+
+      // If there's no active class
+      if (current.length > 0) {
+        current[0].className = current[0].className.replace(
+          " active-class",
+          ""
+        );
+      }
+
+      // Add the active class to the current/clicked button
+
+      this.className += " active-class";
+    });
+  }
 }
-     
 // Scroll to anchor ID using scrollTO event
 
 /**

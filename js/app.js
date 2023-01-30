@@ -65,30 +65,30 @@ myNewNavbar();
 // Build menu
 
 //scroll to section on link click
-window.addEventListener("scroll", addLight);
 
-const links = document.querySelectorAll("a.menu__link");
+// for clickable event
+sections.forEach(section=> {
+  section.onclick = (()=> {
+ setTimeout(()=> {
+  sections.forEach(section=> section.classList.remove('active-link'))
+    section.classList.add('active-link')
+},300)
+ })
+})
 
-// Loop through the links and add the active class to the current/clicked button
-function addLight() {
-  for (let i = 0; i < links.length; i++) {
-    links[i].addEventListener("click", function () {
-      const current = document.getElementsByClassName("active-class");
+// for window scrolldown event
 
-      // If there's no active class
-      if (current.length > 0) {
-        current[0].className = current[0].className.replace(
-          " active-class",
-          ""
-        );
-      }
+window.onscroll = (()=> {
+  const links = document.querySelectorAll("a.menu__link");
 
-      // Add the active class to the current/clicked button
-
-      this.className += " active-class";
-    });
+  sections.forEach((section,i)=> {
+  let rect =section.getBoundingClientRect().y
+  if(rect < window.innerHeight-200){
+      links.forEach(v=> v.classList.remove('active-link'))
+      links[i].classList.add('active-link')
   }
-}
+})
+})
 // Scroll to anchor ID using scrollTO event
 
 /**

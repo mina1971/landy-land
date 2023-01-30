@@ -90,7 +90,7 @@ section {
   transition: ease 0.3s all;
 }
 
-.navbar__menu .menu__link.active-class {
+.navbar__menu .menu__link.active-link {
   background: #333;
   color: #fff;
   transition: ease 0.3s all;
